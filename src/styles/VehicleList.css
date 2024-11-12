@@ -1,0 +1,9 @@
+.vehicle-container{
+    background: #0000009f;
+    color: red;
+}
+.vehicle-list{
+    display: flex;
+    justify-content: center;
+    gap:60px
+}
