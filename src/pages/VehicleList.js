@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Map from '../components/Map';
 import "../styles/VehicleList.css"
+import { Link } from 'react-router-dom';
 
 function VehicleList() {
   const [vehicles, setVehicles] = useState([]);
@@ -33,12 +35,18 @@ function VehicleList() {
       <h1>Vehicle List</h1>
       <div className='vehicle-list'>
         {vehicles.map((vehicle) => (
-          <div key={vehicle.id} className='vehicle-container'>
-            <h2>{vehicle.vehicleId}</h2>
-            <p>Longitude: {vehicle.longitude}</p>
-            <p>Latitude: {vehicle.latitude}</p>
-            <p>Time Stamp: {vehicle.timestamp}</p>
-          </div>
+            
+                <div key={vehicle.id} className='vehicle-container'>
+                            <h2>{vehicle.vehicleId}</h2>
+                            <p>Longitude: {vehicle.longitude}</p>
+                            <p>Latitude: {vehicle.latitude}</p>
+                            <p>Time Stamp: {vehicle.timestamp}</p>
+                            <Link to={`/map?lat=${vehicle.latitude}&lng=${vehicle.longitude}`}>
+              View Location
+            </Link>
+                        </div>
+         
+          
         ))}
       </div>
     </div>
