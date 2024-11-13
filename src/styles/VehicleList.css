@@ -3,7 +3,10 @@
     color: red;
 }
 .vehicle-list{
-    display: flex;
+
     justify-content: center;
     gap:60px
+}
+.card > *{
+    margin-left: 10px;
 }

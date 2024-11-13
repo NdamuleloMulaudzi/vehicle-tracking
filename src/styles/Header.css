@@ -1,9 +1,20 @@
 
 .header {
-    background: #000;
-    margin-left: 0;
+   background: url("../assets/truck.png");
+background-size: cover;
+background-position: 0px;
+   background-repeat: no-repeat;
+
+  
     color: white;
     padding :15px;
+    justify-content: space-between;
+    gap: 15px;
+    
+
+  }
+  img[alt=Logo]{
+    width: 5%;
   }
   
  

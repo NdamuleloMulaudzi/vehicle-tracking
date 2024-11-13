@@ -1,14 +1,14 @@
 
 import React from "react";
+import "../styles/VehicleList.css"
 
 const VehicleList = ({ vehicles, setCenter, setZoom }) => (
   <div className="vehicle-list">
     {vehicles.map((vehicle, index) => (
       <div
         key={vehicle.id}
-        className={`card mb-3 text-white ${
-          index % 2 === 0 ? "bg-primary" : "bg-secondary"
-        }`}
+        className="card mb-2 text-black "
+          
         onClick={() => {
           setCenter({ lat: vehicle.latitude, lng: vehicle.longitude });
           setZoom(14);

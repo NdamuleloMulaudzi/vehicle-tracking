@@ -15,7 +15,7 @@ const Map = ({ center, zoom, vehicles }) => {
       zoom={zoom}
       mapContainerStyle={{
         width: "100%",
-        height: "100vh",
+        height: "85%",
         position: "absolute", 
         top: 0,
         left: 0,
