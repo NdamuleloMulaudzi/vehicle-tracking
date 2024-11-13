@@ -1,17 +1,11 @@
 
 
-.header-container{
-  margin: 0;
-  width: 100%;
-}
-
-
-
 
 .container-fluid {
   display: flex;
   flex-direction: column;
-
+  height: 100vh; 
+  overflow: hidden;
 }
 
 .row {
@@ -26,87 +20,49 @@
 }
 
 
-
-
-
-
-
-@media (max-width: 768px) {
-  .vehicle-list-container{
-    display: none;}
-  /* Sidebar: Full width on mobile */
-  .sidebar {
-    width: 100%;
-    height: 100vh;
-  }
-
-  /* Make vehicle list and filter components stack */
-  .vehicle-list-container {
-    padding: 10px;
-    margin: 0;
-  }
-
-  /* Make map container fill available space on mobile */
- 
+.car-icon{
+  display: none;
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+.sidebar-toggle {
+  position: relative;
+  top:-8px;
+  left: 0;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 3;
 }
 
-/* Extra small screen adjustments */
-@media (max-width: 480px) {
-  .map-container {
-    height: 100vh;
-    width: 100%;
-    position: relative;
+.google-map{
+  height: 86%;
+}
+
+
+@media (max-width: 768px){
+  .car-icon{
+    display: block;
   }
-  
-  /* Sidebar styles */
+ 
   .sidebar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    width: 250px;
+    width: 100%;
+    max-width: 300px;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    overflow-y: auto;
-    z-index: 1000;
+    z-index: 2;
   }
-  
   .sidebar.open {
     transform: translateX(0);
   }
-  
-  /* Burger Icon */
-  .burger-icon {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 1100;
-  }
-  .vehicle-list-container {
-    display: none;
-  }
-  /* Resize burger icon for smaller screens */
-  .burger-icon {
-    font-size: 1.25rem;
-    top: 10px;
-    left: 10px;
-  }
-
-  /* Adjust sidebar to fit better on small screens */
-  .sidebar {
-    padding: 10px;
-    font-size: 0.9rem;
-  }
-
-  /* Adjust vehicle card size */
-  .vehicle-list .card {
-    font-size: 0.85rem;
-    padding: 8px;
-  }
+   
 }
+

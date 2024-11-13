@@ -2,7 +2,7 @@
 import React from "react";
 import "../styles/VehicleList.css"
 
-const VehicleList = ({ vehicles, setCenter, setZoom }) => (
+const VehicleList = ({ vehicles, setCenter, setZoom, onVehicleClick }) => (
   <div className="vehicle-list">
     {vehicles.map((vehicle) => (
       <div
@@ -12,6 +12,7 @@ const VehicleList = ({ vehicles, setCenter, setZoom }) => (
         onClick={() => {
           setCenter({ lat: vehicle.latitude, lng: vehicle.longitude });
           setZoom(14);
+          onVehicleClick(vehicle)
         }}
       >
         <h3>Vehicle {vehicle.id}</h3>

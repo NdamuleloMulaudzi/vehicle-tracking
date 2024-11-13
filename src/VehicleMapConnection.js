@@ -3,7 +3,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import VehicleList from "./components/VehicleList";
 import Map from "./components/Map";
 import VehicleFilter from "./helpers/VehicleFilter";
-import BurgerIcon from "./helpers/BurgerIcon";
+import { FaCarRear } from "react-icons/fa6";
 
 import "./App.css";
 
@@ -16,8 +16,7 @@ const VehicleMapConnection = () => {
   const [filteredVehicles, setFilteredVehicles] = useState([]);
   const [center, setCenter] = useState({ lat: 0, lng: 0 });
   const [zoom, setZoom] = useState(2);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
@@ -39,15 +38,24 @@ const VehicleMapConnection = () => {
 
   if (!isLoaded) return <div>Loading...</div>;
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   
+  const handleVehicleClick = (vehicle) => {
+    setCenter({ lat: vehicle.latitude, lng: vehicle.longitude });
+    setZoom(14);
+    setSidebarOpen(false); // Close sidebar after vehicle click
+  };
 
   return (
-    <div className=" container-fluid vh-100 d-flex position-relative">
-      <BurgerIcon toggleSidebar={toggleSidebar} />
+    <div className="container-fluid vh-100 d-flex position-relative">
+       <FaCarRear
+        className="car-icon sidebar-toggle"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      size={30}/>
+        
+
 
       <div className="vehicle-map-container row flex-grow-1">
-        <div className={`col-md-3 p-3 vehicle-list-container sidebar ${isSidebarOpen ? "open" : ""}}`}>
+        <div className={`col-md-3 p-3 vehicle-list-container sidebar ${sidebarOpen ? "open" : ""}`}>
           <VehicleFilter
             vehicles={vehicles}
             setFilteredVehicles={setFilteredVehicles}
@@ -56,6 +64,7 @@ const VehicleMapConnection = () => {
             vehicles={filteredVehicles}
             setCenter={setCenter}
             setZoom={setZoom}
+            onVehicleClick={handleVehicleClick}
           />
         </div>
         <div className="col-md-9 p-0">

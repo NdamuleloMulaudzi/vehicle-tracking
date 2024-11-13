@@ -11,17 +11,17 @@ const Map = ({ center, zoom, vehicles }) => {
 
   return (
     <GoogleMap
-      center={center}
-      zoom={zoom}
-      mapContainerStyle={{
-        width: "100%",
-        height: "85%",
-        position: "absolute", 
-        top: 0,
-        left: 0,
-        zIndex: 1,
-      }}
-    >
+  center={center}
+  zoom={zoom}
+  mapContainerStyle={{
+    width: "100vw",    
+    height: "85%",   
+    position: "absolute",
+    top: 0,
+    left: 0,
+  }}
+
+>
       {vehicles.map((vehicle) => (
         <Marker
           key={vehicle.id}
