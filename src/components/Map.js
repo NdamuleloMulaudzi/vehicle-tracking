@@ -1,33 +1,56 @@
-import React from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import { useLocation } from 'react-router-dom';
+// Map.js
+import React, { useState } from "react";
+import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 
-function Map() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyCpBt_DnZt5j-MkM_efrPOD8yKro40jPLg',
-  });
+const Map = ({ center, zoom, vehicles }) => {
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const lat = parseFloat(queryParams.get("lat"));
-  const lng = parseFloat(queryParams.get("lng"));
-
-  const mapCenter = {
-    lat: isNaN(lat) ? 0 : lat,
-    lng: isNaN(lng) ? 0 : lng,
+  const handleMarkerClick = (vehicle) => {
+    setSelectedVehicle(vehicle);
   };
-
-  if (!isLoaded) return <p>Loading...</p>;
 
   return (
     <GoogleMap
-      mapContainerStyle={{ width: '100%', height: '400px' }}
-      center={mapCenter}
-      zoom={8}
+      center={center}
+      zoom={zoom}
+      mapContainerStyle={{
+        width: "100%",
+        height: "100vh",
+        position: "absolute", 
+        top: 0,
+        left: 0,
+        zIndex: 1,
+      }}
     >
-      <Marker position={mapCenter} />
+      {vehicles.map((vehicle) => (
+        <Marker
+          key={vehicle.id}
+          position={{ lat: vehicle.latitude, lng: vehicle.longitude }}
+          onClick={() => handleMarkerClick(vehicle)}
+        />
+      ))}
+
+      {selectedVehicle && (
+        <InfoWindow
+          position={{
+            lat: selectedVehicle.latitude,
+            lng: selectedVehicle.longitude,
+          }}
+          onCloseClick={() => setSelectedVehicle(null)}
+        >
+          <div>
+            <h5>Vehicle {selectedVehicle.id}</h5>
+            <p>Lat: {selectedVehicle.latitude}</p>
+            <p>Lng: {selectedVehicle.longitude}</p>
+            <p>
+              Last Updated:{" "}
+              {new Date(selectedVehicle.timestamp).toLocaleString()}
+            </p>
+          </div>
+        </InfoWindow>
+      )}
     </GoogleMap>
   );
-}
+};
 
 export default Map;
