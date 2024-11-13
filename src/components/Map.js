@@ -1,4 +1,4 @@
-// Map.js
+
 import React, { useState } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 

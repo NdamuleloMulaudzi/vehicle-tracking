@@ -1,4 +1,4 @@
-// App.js
+
 import React, { useEffect, useState } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import VehicleList from "./components/VehicleList";
@@ -40,7 +40,10 @@ const App = () => {
 
   return (
     <div className="container-fluid vh-100 d-flex position-relative">
+      <div className="heade-container">
       <Header />
+      </div>
+      
       <div className="row flex-grow-1">
         <div className="col-md-3 p-3 vehicle-list-container">
           <VehicleFilter
