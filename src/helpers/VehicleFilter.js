@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/VehicleList.css"
 
 const VehicleFilter = ({ vehicles, setFilteredVehicles }) => {
   const [searchVehicle, setSearchVehilce] = useState("");

@@ -3,6 +3,8 @@ import { useLoadScript } from "@react-google-maps/api";
 import VehicleList from "./components/VehicleList";
 import Map from "./components/Map";
 import VehicleFilter from "./helpers/VehicleFilter";
+import BurgerIcon from "./helpers/BurgerIcon";
+
 import "./App.css";
 
 const VehicleMapConnection = () => {
@@ -14,6 +16,7 @@ const VehicleMapConnection = () => {
   const [filteredVehicles, setFilteredVehicles] = useState([]);
   const [center, setCenter] = useState({ lat: 0, lng: 0 });
   const [zoom, setZoom] = useState(2);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchVehicles = async () => {
@@ -36,12 +39,15 @@ const VehicleMapConnection = () => {
 
   if (!isLoaded) return <div>Loading...</div>;
 
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  
+
   return (
-    <div className="container-fluid vh-100 d-flex position-relative">
-      
-      
-      <div className="row flex-grow-1">
-        <div className="col-md-3 p-3 vehicle-list-container">
+    <div className=" container-fluid vh-100 d-flex position-relative">
+      <BurgerIcon toggleSidebar={toggleSidebar} />
+
+      <div className="vehicle-map-container row flex-grow-1">
+        <div className={`col-md-3 p-3 vehicle-list-container sidebar ${isSidebarOpen ? "open" : ""}}`}>
           <VehicleFilter
             vehicles={vehicles}
             setFilteredVehicles={setFilteredVehicles}
@@ -56,6 +62,7 @@ const VehicleMapConnection = () => {
           <Map center={center} zoom={zoom} vehicles={filteredVehicles} />
         </div>
       </div>
+      
     </div>
   );
 };

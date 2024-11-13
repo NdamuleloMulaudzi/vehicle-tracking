@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div className='App'>
         <Header />
-        <VehicleMapConnection />
+        <VehicleMapConnection className="connection"/>
     </div>
   )
 }

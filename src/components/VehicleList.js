@@ -4,7 +4,7 @@ import "../styles/VehicleList.css"
 
 const VehicleList = ({ vehicles, setCenter, setZoom }) => (
   <div className="vehicle-list">
-    {vehicles.map((vehicle, index) => (
+    {vehicles.map((vehicle) => (
       <div
         key={vehicle.id}
         className="card mb-2 text-black "
@@ -17,7 +17,7 @@ const VehicleList = ({ vehicles, setCenter, setZoom }) => (
         <h3>Vehicle {vehicle.id}</h3>
         <p>Lat: {vehicle.latitude}</p>
         <p>Lng: {vehicle.longitude}</p>
-        <p>Last Updated: {new Date(vehicle.timestamp).toLocaleString()}</p>
+        <p>Last Updated: {new Date().toLocaleString()}</p>
       </div>
     ))}
   </div>

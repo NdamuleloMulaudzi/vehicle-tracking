@@ -10,7 +10,7 @@ background-position: 0px;
     padding :15px;
     justify-content: space-between;
     gap: 15px;
-    
+
 
   }
   img[alt=Logo]{
@@ -24,4 +24,30 @@ background-position: 0px;
     font-weight: bold;
     color: aliceblue;
   }
+
+  @media (max-width: 768px) {
+    .header {
+      text-align: center; /* Center the text and logo on small screens */
+    }
+  
+    .header .name {
+      font-size: .3rem; /* Adjust font size for smaller screens */
+    }
+  
+    img[alt="Logo"] {
+      width: 5%; /* Increase the logo size for mobile */
+    }
+  }
+  
+  /* Optionally for very small screens (mobile devices) */
+  @media (max-width: 480px) {
+    .header .name {
+      font-size: .8rem; /* Reduce font size even more on small screens */
+    }
+  
+    img[alt="Logo"] {
+      width: 8%; /* Make logo slightly bigger */
+    }
+  }
+  
   
