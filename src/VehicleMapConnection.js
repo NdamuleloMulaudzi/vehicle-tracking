@@ -7,7 +7,7 @@ import { FaCarRear } from "react-icons/fa6";
 
 import "./App.css";
 
-const VehicleMapConnection = () => {
+ const VehicleMapConnection = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCpBt_DnZt5j-MkM_efrPOD8yKro40jPLg",
   });
@@ -15,6 +15,7 @@ const VehicleMapConnection = () => {
   const [vehicles, setVehicles] = useState([]);
   const [filteredVehicles, setFilteredVehicles] = useState([]);
   const [center, setCenter] = useState({ lat: 0, lng: 0 });
+  const [historicalRoute, setHistoricalRoute] = useState([]);
   const [zoom, setZoom] = useState(2);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   useEffect(() => {
@@ -39,11 +40,20 @@ const VehicleMapConnection = () => {
   if (!isLoaded) return <div>Loading...</div>;
 
   
-  const handleVehicleClick = (vehicle) => {
+  const handleVehicleClick = async (vehicle) => {
     setCenter({ lat: vehicle.latitude, lng: vehicle.longitude });
     setZoom(14);
-    setSidebarOpen(false); // Close sidebar after vehicle click
+    setSidebarOpen(false); 
+
+    const response = await fetch(`https://6731c2a97aaf2a9aff11ea28.mockapi.io/api/v1/vehicles/${vehicle.id}`);
+  const data = await response.json();
+  
+  // Set historical route to state
+  setHistoricalRoute(data.historicalRoute);
+  
   };
+
+  
 
   return (
     <div className="container-fluid vh-100 d-flex position-relative">
@@ -68,7 +78,7 @@ const VehicleMapConnection = () => {
           />
         </div>
         <div className="col-md-9 p-0">
-          <Map center={center} zoom={zoom} vehicles={filteredVehicles} />
+          <Map center={center} zoom={zoom} vehicles={filteredVehicles}  historicalRoute={historicalRoute} />
         </div>
       </div>
       
