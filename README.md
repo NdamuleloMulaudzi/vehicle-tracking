@@ -1,6 +1,6 @@
 
 
-# **Vehicle Tracking Dashboar**
+# **Vehicle Tracking Dashboard**
 
 A web application for visualizing vehicle locations on a map, with real-time updates and historical route tracking. The app uses Google Maps to display vehicle markers and routes and periodically fetches vehicle data to maintain up-to-date information.
 
