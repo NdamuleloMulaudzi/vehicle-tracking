@@ -80,7 +80,7 @@ Error handling is implemented for network requests:
 ## **Usage**
 
 - **Click on a vehicle marker** to view its information and historical route.
-- **Use the sidebar** to search for specific vehicles or filter by location.
+- **Use the search input** to search for specific vehicles using and ID(number).
 - **On mobile screens**, use the toggle button(truck icon) to open and close the sidebar.
 
 ---
