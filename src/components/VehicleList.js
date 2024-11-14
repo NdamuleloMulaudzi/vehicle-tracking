@@ -7,17 +7,18 @@ const VehicleList = ({ vehicles, setCenter, setZoom, onVehicleClick }) => (
     {vehicles.map((vehicle) => (
       <div
         key={vehicle.id}
-        className="card mb-2 text-black "
+        className="card"
           
         onClick={() => {
-          setCenter({ lat: vehicle.latitude, lng: vehicle.longitude });
+          const lastPosition = vehicle.historicalRoute[vehicle.historicalRoute.length - 1]
+          setCenter({ lat:lastPosition.lat, lng: lastPosition.lng});
           setZoom(14);
           onVehicleClick(vehicle)
         }}
       >
         <h3>Vehicle {vehicle.id}</h3>
-        <p>Lat: {vehicle.latitude}</p>
-        <p>Lng: {vehicle.longitude}</p>
+        <p>Lat: {vehicle.historicalRoute[vehicle.historicalRoute.length-1]?.lat}</p>
+        <p>Lng: {vehicle.historicalRoute[vehicle.historicalRoute.length - 1]?.lng}</p>
         <p>Last Updated: {new Date().toLocaleString()}</p>
       </div>
     ))}

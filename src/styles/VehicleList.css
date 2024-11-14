@@ -5,10 +5,13 @@
 .vehicle-list{
 
     justify-content: center;
-    gap:60px
+    gap:60px;
+    max-height: 100%;
+  overflow-y: auto;
 }
 .card > *{
-    margin-left: 10px;
+
+    margin-left: 0px;
 }
 
 .vehicle-list-container {
@@ -20,20 +23,16 @@
   transform: translateY(-50%);
   overflow-y: auto;
   z-index: 2;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(120,175,168,0.5);
+  
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   padding: 20px;
 }
 
-.vehicle-list {
-  
-  max-height: 100%;
-  overflow-y: auto;
-}
-
-/* Styling for individual vehicle cards */
+/* Style for individual vehicle cards */
 .card {
+ 
   cursor: pointer;
   margin-bottom: 10px;
   padding: 20px;
@@ -48,16 +47,6 @@
   font-size: 12px;
 }
 
-@media (max-width: 768px) {
-    .connection{
-      display: none;
-  }
-  }
-  
-  @media (max-width: 480px) {
-    .connection{
-        display: none;
-    }
-  }
+
   
   

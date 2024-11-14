@@ -41,7 +41,7 @@ import "./App.css";
 
   
   const handleVehicleClick = async (vehicle) => {
-    setCenter({ lat: vehicle.latitude, lng: vehicle.longitude });
+    setCenter({ lat: vehicle.historicalRoute[vehicle.historicalRoute.length - 1].lat, lng: vehicle.historicalRoute[vehicle.historicalRoute.length - 1].lng});
     setZoom(14);
     setSidebarOpen(false); 
 
