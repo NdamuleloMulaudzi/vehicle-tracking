@@ -1,70 +1,102 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# **Vehicle Tracking Dashboar**
 
-In the project directory, you can run:
+A web application for visualizing vehicle locations on a map, with real-time updates and historical route tracking. The app uses Google Maps to display vehicle markers and routes and periodically fetches vehicle data to maintain up-to-date information.
 
-### `npm start`
+## **Features**
+- **Display vehicle markers** on a Google Map.
+- **View historical routes** of selected vehicles.
+- **Auto-refresh data** every 30 seconds.
+- **Sidebar** with a searchable list of vehicles.
+- **Mobile-responsive** layout.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Getting Started**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **Prerequisites**
+- **Node.js**: Ensure Node.js (version 14 or above) is installed.
+- **Google Maps API Key**: Obtain a Google Maps API key from [Google Cloud Console](https://console.cloud.google.com/).
 
-### `npm test`
+### **Installation**
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/VehicleMapConnection.git
+   cd VehicleMapConnection
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. **Set up your environment variables:**
+   - Create a `.env` file in the project root and add your Google Maps API key:
+     ```plaintext
+     REACT_APP_GOOGLE_MAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY
+     ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Start the development server:**
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. **Access the app** in your browser at `http://localhost:3000`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **Configuration**
 
-### `npm run eject`
+### **Google Maps API Key**
+Ensure the API key in `.env` has access to **Maps JavaScript API** and **Directions API** for map and route rendering.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **Auto-Refresh**
+- Vehicle data refreshes every **30 seconds** to show the latest locations.
+- The auto-refresh is configured within the `fetchVehicles` function in `VehicleMapConnection.js`:
+  ```javascript
+  useEffect(() => {
+    const interval = setInterval(fetchVehicles, 30000);
+    return () => clearInterval(interval);
+  }, []);
+  ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **Error Handling**
+Error handling is implemented for network requests:
+- **Vehicle Data Fetching**: A `try...catch` block is used in `fetchVehicles` to log errors when fetching vehicle data fails. Update it to display an error message if needed:
+  ```javascript
+  const fetchVehicles = async () => {
+    try {
+      const response = await fetch("https://mockapi.io/vehicles");
+      const data = await response.json();
+      setVehicles(data);
+      setFilteredVehicles(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      alert("Failed to fetch vehicle data. Please try again later.");
+    }
+  };
+  ```
+- **Google Maps Directions**: In `Map.js`, a `try...catch` block captures errors when fetching route directions:
+  ```javascript
+  try {
+    const result = await directionsService.route(request);
+    setDirections(result);
+  } catch (error) {
+    console.error("Error fetching directions:", error);
+  }
+  ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## **Usage**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Click on a vehicle marker** to view its information and historical route.
+- **Use the sidebar** to search for specific vehicles or filter by location.
+- **On mobile screens**, use the toggle button to open and close the sidebar.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **Additional Notes**
+- **Custom Refresh Intervals**: Modify the interval duration in `fetchVehicles`.
+- **Map Display Adjustments**: Edit settings in `Map.js` to fit your screen and UX needs.
+- **API Key Security**: For production, secure the API key with restrictions and tailor error messages for end-users.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+This README provides setup and configuration guidance with insights into key aspects of the app, including the refresh mechanism and error handling. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

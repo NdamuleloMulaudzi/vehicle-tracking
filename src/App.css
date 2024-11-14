@@ -1,10 +1,25 @@
+/* Loading Page styles */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #f3f3f3; 
+  border-top: 6px solid #3498db; 
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 
 .container-fluid {
   display: flex;
   flex-direction: column;
-  height: 100vh; 
-  overflow: hidden;
 }
 
 .row {
@@ -14,6 +29,8 @@
 
 .col-md-9 {
   z-index: 1;
+
+  
 }
 
 
@@ -24,18 +41,20 @@
   transform: translateX(0);
 }
 .sidebar-toggle {
-  position: relative;
-  top:-8px;
-  left: 0;
-  background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
   z-index: 3;
+  color:white;
 }
+.icon-bg{
+  background: red;
+  position: absolute;
+  padding: 10px;
+  left: 20px;
+  border-radius: 50%;
+  bottom: 60px;
 
-.google-map{
-  height: 86%;
 }
 
 
@@ -55,6 +74,7 @@
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 2;
+    
   }
   .sidebar.open {
     transform: translateX(0);

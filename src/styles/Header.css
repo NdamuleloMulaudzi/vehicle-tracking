@@ -1,15 +1,15 @@
 
 .header {
-   background: url("../assets/truck.png");
-background-size: cover;
-background-position: 0px;
-   background-repeat: no-repeat;
-
-  
-    color: white;
-    padding :15px;
-    justify-content: space-between;
-    gap: 15px;
+  background: url("../assets/truck.png");
+  background-size: cover;
+  background-position: 0px;
+  background-repeat: no-repeat;
+  box-shadow: 0 3px 5px #db5e65;
+      
+  color: white;
+  padding :5px;
+  justify-content: space-between;
+  gap: 15px;
 
 
   }
@@ -27,26 +27,26 @@ background-position: 0px;
 
   @media (max-width: 768px) {
     .header {
-      text-align: center; /* Center the text and logo on small screens */
+      text-align: center;
     }
   
     .header .name {
-      font-size: .3rem; /* Adjust font size for smaller screens */
+      font-size: .3rem;
     }
   
     img[alt="Logo"] {
-      width: 5%; /* Increase the logo size for mobile */
+      width: 15%; /* Increase the logo size for mobile */
     }
   }
   
-  /* Optionally for very small screens (mobile devices) */
+
   @media (max-width: 480px) {
     .header .name {
-      font-size: .8rem; /* Reduce font size even more on small screens */
+      font-size: .8rem; 
     }
   
     img[alt="Logo"] {
-      width: 8%; /* Make logo slightly bigger */
+      width: 11%; 
     }
   }
   

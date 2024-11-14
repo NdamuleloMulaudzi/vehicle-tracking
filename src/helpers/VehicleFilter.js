@@ -5,10 +5,10 @@ const VehicleFilter = ({ vehicles, setFilteredVehicles }) => {
   const [searchVehicle, setSearchVehilce] = useState("");
 
   const handleSearch = (e) => {
-    const term = e.target.value;
-    setSearchVehilce(term);
+    const id = e.target.value;
+    setSearchVehilce(id);
     setFilteredVehicles(
-      vehicles.filter((vehicle) => vehicle.id.includes(term))
+      vehicles.filter((vehicle) => vehicle.id.includes(id))
     );
   };
 

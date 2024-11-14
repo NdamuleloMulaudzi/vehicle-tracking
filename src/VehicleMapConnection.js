@@ -3,13 +3,13 @@ import { useLoadScript } from "@react-google-maps/api";
 import VehicleList from "./components/VehicleList";
 import Map from "./components/Map";
 import VehicleFilter from "./helpers/VehicleFilter";
-import { FaCarRear } from "react-icons/fa6";
+import { FaTruckMoving } from "react-icons/fa6";
 
 import "./App.css";
 
  const VehicleMapConnection = () => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCpBt_DnZt5j-MkM_efrPOD8yKro40jPLg",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   const [vehicles, setVehicles] = useState([]);
@@ -37,7 +37,12 @@ import "./App.css";
     return () => clearInterval(interval);
   }, []);
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return (
+    <div className="loading">
+      <div className="spinner"></div>
+    </div>
+  );
+  
 
   
   const handleVehicleClick = async (vehicle) => {
@@ -57,13 +62,7 @@ import "./App.css";
 
   return (
     <div className="container-fluid vh-100 d-flex position-relative">
-       <FaCarRear
-        className="car-icon sidebar-toggle"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      size={30}/>
-        
-
-
+       
       <div className="vehicle-map-container row flex-grow-1">
         <div className={`col-md-3 p-3 vehicle-list-container sidebar ${sidebarOpen ? "open" : ""}`}>
           <VehicleFilter
@@ -77,11 +76,15 @@ import "./App.css";
             onVehicleClick={handleVehicleClick}
           />
         </div>
-        <div className="col-md-9 p-0">
+        <div className="">
           <Map center={center} zoom={zoom} vehicles={filteredVehicles}  historicalRoute={historicalRoute} />
         </div>
       </div>
-      
+      <div className="icon-bg" onClick={() => setSidebarOpen(!sidebarOpen)}>
+      <FaTruckMoving
+          className="car-icon sidebar-toggle"
+        size={20}/>
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@
 import React from "react";
 import "../styles/VehicleList.css"
 
+
 const VehicleList = ({ vehicles, setCenter, setZoom, onVehicleClick }) => (
   <div className="vehicle-list">
     {vehicles.map((vehicle) => (

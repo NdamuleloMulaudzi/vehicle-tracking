@@ -1,17 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, InfoWindow, Polyline } from "@react-google-maps/api";
+import "../App.css"
 
 const Map = ({ center, zoom, vehicles, historicalRoute = [] }) => {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [directions, setDirections] = useState(null);
-  
-  
+
   // Function to generate history route 
   const generateRoute = async () => {
     if (historicalRoute.length < 2) return; 
-    
+
     const directionsService = new window.google.maps.DirectionsService();
-    
     const waypoints = historicalRoute.slice(1, historicalRoute.length - 1).map(location => ({
       location: new window.google.maps.LatLng(location.lat, location.lng),
       stopover: false,
@@ -37,12 +37,12 @@ const Map = ({ center, zoom, vehicles, historicalRoute = [] }) => {
     if (historicalRoute.length > 1) {
       generateRoute(); 
     }
-  },[historicalRoute]);
+  }, [historicalRoute]);
 
+  // Handler for when a marker is clicked
   const handleMarkerClick = (vehicle) => {
     setSelectedVehicle(vehicle);
   };
- 
   
   return (
     <GoogleMap
@@ -50,34 +50,37 @@ const Map = ({ center, zoom, vehicles, historicalRoute = [] }) => {
       zoom={zoom}
       mapContainerStyle={{
         width: "100vw",
-        height: "85%",
+        height: "86%",
         position: "absolute",
+        background:'red',
         top: 0,
         left: 0,
       }}
     >
-      
       {vehicles.map((vehicle) => (
         <Marker
           key={vehicle.id}
-          position={{ lat: vehicle.historicalRoute[vehicle.historicalRoute.length - 1].lat, lng: vehicle.historicalRoute[vehicle.historicalRoute.length - 1].lng }}
-          onClick={() => handleMarkerClick(vehicle)}
+          position={{ 
+            lat: vehicle.historicalRoute[vehicle.historicalRoute.length - 1].lat, 
+            lng: vehicle.historicalRoute[vehicle.historicalRoute.length - 1].lng 
+          }}
+          onClick={() => handleMarkerClick(vehicle)} // Set vehicle on marker click
         />
       ))}
 
-      {/* Rende info window when marker is clicked */}
+      {/* Render InfoWindow for the selected vehicle on marker click */}
       {selectedVehicle && (
         <InfoWindow
           position={{
-            lat: selectedVehicle.historicalRoute[historicalRoute.length-1].lat,
-            lng: selectedVehicle.historicalRoute[historicalRoute.length-1].lng,
+            lat: selectedVehicle.historicalRoute[selectedVehicle.historicalRoute.length - 1].lat,
+            lng: selectedVehicle.historicalRoute[selectedVehicle.historicalRoute.length - 1].lng,
           }}
           onCloseClick={() => setSelectedVehicle(null)}
         >
           <div>
             <h5>Vehicle {selectedVehicle.id}</h5>
-            <p>Lat: {selectedVehicle.historicalRoute[historicalRoute.length-1].lat}</p>
-            <p>Lng: {selectedVehicle.historicalRoute[historicalRoute.length-1].lng}</p>
+            <p>Lat: {selectedVehicle.historicalRoute[selectedVehicle.historicalRoute.length - 1].lat}</p>
+            <p>Lng: {selectedVehicle.historicalRoute[selectedVehicle.historicalRoute.length - 1].lng}</p>
             <p>
               Last Updated: {new Date().toLocaleString()}
             </p>
