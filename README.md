@@ -81,7 +81,7 @@ Error handling is implemented for network requests:
 
 - **Click on a vehicle marker** to view its information and historical route.
 - **Use the sidebar** to search for specific vehicles or filter by location.
-- **On mobile screens**, use the toggle button to open and close the sidebar.
+- **On mobile screens**, use the toggle button(truck icon) to open and close the sidebar.
 
 ---
 
